@@ -1,5 +1,5 @@
 <?php
-
+/*
 $conta1 = ['nome' => 'Eloisa', 'saldo' => 11.000];
 $conta2 = ['nome' => 'Ezequiel', 'saldo' => 10.000];
 $conta3 = ['nome' => 'Elis', 'saldo' => 15.000];
@@ -14,4 +14,13 @@ for ($i = 0; $i < count($contasCorrentes); $i++){
 
     echo $contasCorrentes[$i]['nome'];
     echo $contasCorrentes[$i]['saldo'].PHP_EOL;
+}
+*/
+
+$listaNum = [20, 25, 30, 65, 80, 90];
+
+$listaNum [] = 67;
+
+foreach ($listaNum as $list) {
+    echo $list . PHP_EOL;
 }
