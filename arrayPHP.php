@@ -21,6 +21,11 @@ $listaNum = [20, 25, 30, 65, 80, 90];
 
 $listaNum [] = 67;
 
-foreach ($listaNum as $list) {
-    echo $list . PHP_EOL;
-}
+
+list($idadeLulu, $idadeEze) = $listaNum;
+
+echo $idadeEze . $idadeLulu;
+
+//foreach ($listaNum as $list) {
+ //   echo $list . PHP_EOL;
+//}

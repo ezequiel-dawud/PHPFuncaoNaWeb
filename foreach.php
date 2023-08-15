@@ -1,47 +1,75 @@
 <?php
-
+include 'funcoes.php';
+//require 'funcoes.php'; para que a aplicação só funcione se estiiver tudo certo no outro arquivo
 
 $contasCorrentes = [
-    '12114530' => ['nome' => 'Eloisa', 'saldo' => 11.000], 
-    '55635854' => ['nome' => 'Ezequiel', 'saldo' => 10.000], 
-    '87552255' => ['nome' => 'Elis', 'saldo' => 15.000], 
-    '00149536' => ['nome' =>'Dawud', 'saldo' => 22.000]
- ];
- 
- $contasCorrentes['22558877'] = ['nome' => 'Eze', 'saldo' => 55];
- 
- 
-function exibeMensagem ($mensagem){
-    echo $mensagem . PHP_EOL;
-};
+    '123.456.789-10' => [
+        'titular' => 'Maria',
+        'saldo' => 10000
+    ],
+    '123.456.689-11' => [
+        'titular' => 'Alberto',
+        'saldo' => 300
+    ],
+    '123.256.789-12' => [
+        'titular' => 'Vinicius',
+        'saldo' => 100
+    ],
+    '122.256.789-12' => [
+        'titular' => 'Elis',
+        'saldo' => 25000
+    ]
+];
 
-function sacar(array $conta, float $valorASacar): array 
-{
-    if ($valorASacar > $conta){
-     exibeMensagem("não há grana");
-    } else {
-        $conta['saldo'] -= $valorASacar;
-    }
+$contasCorrentes['123.456.789-10'] = sacar(
+    $contasCorrentes['123.456.789-10'],
+    500
+);
 
-    return $conta;
-};
+$contasCorrentes['123.456.689-11'] = sacar(
+    $contasCorrentes['123.456.689-11'],
+    200
+);
 
-function depositar(array $conta, float $deposito): array 
-{
-    if ($deposito > 0){
-        $conta['saldo'] += $deposito;
-    } else {
-       echo 'Deposite um volor acima de R$ 0.01'. PHP_EOL;
-    }
-    return $conta;
-} 
+$contasCorrentes['123.256.789-12'] = depositar(
+    $contasCorrentes['123.256.789-12'],
+    900
+);
 
-$contasCorrentes['22558877'] = sacar($contasCorrentes['22558877'], $valorASacar = 50);
+unset($contasCorrentes['123.456.689-11']);
 
-$contasCorrentes['22558877'] = depositar($contasCorrentes['22558877'], $deposito = -100);
-
+titularComLetrasMaiusculas($contasCorrentes['123.256.789-12']);
 
 
-foreach ($contasCorrentes as $cpf => $titular) {
-    exibeMensagem($cpf ." - ". $titular['nome'] ." - ". $titular['saldo']); 
+echo "<ul>";
+foreach ($contasCorrentes as $cpf => $conta) {
+        exibeConta($conta);
 }
+echo "</ul>";
+
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Contas correntes</h1>
+
+    <dl>
+        <?php foreach($contasCorrentes as $cpf => $conta) { ?>
+        <dt>
+            <h3>
+                <?= $conta ['titular'];?> - <?= $cpf; ?>
+            </h3>
+        </dt>
+        <dd>
+            Saldo:<?=  $conta['saldo']; ?>
+        </dd>
+        <?php } ?>
+    </dl>
+</body>
+</html>
